@@ -35,7 +35,8 @@ class _CounterPageState extends State<CounterPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Day 11 - Counter Page'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        foregroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 38, 64, 84),
       ),
       body: Center(
         child: Column(

@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'y00_DAY09_flutterProject.dart';
 import 'z00_DAY10_welcomePage.dart';
 import 'z01_DAY11_counterPage.dart';
-
+import 'z01_DAY12_loginPage.dart';
+import 'z01_DAY13_detailScreen.dart';
+import 'z01_DAY14_taskList.dart';
 
 // Day 09 Flutter - 01.12.2025
 // Day 10 Flutter - 06.12.2025
 // Day 11 Flutter - 07.12.2025
-
+// Day 12 Flutter - 15.12.2025
+// Day 13 Flutter - 16.12.2025
+// Day 14 Flutter - 20.12.2025
 
 void main() {
   runApp(const MainApp());
@@ -22,15 +26,18 @@ class MainApp extends StatelessWidget {
       title: 'Flutter App',
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 40, 80, 112)),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromARGB(255, 40, 80, 112),
+        ),
       ),
       home: const HomePage(),
       debugShowCheckedModeBanner: false,
-      builder: (context, child) { return RepaintBoundary(child: child!); },
-    );  
+      builder: (context, child) {
+        return RepaintBoundary(child: child!);
+      },
+    );
   }
 }
-
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -40,6 +47,8 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Abzal BAIKENOV - Home Work'),
+        foregroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 38, 64, 84),
       ),
       body: Center(
         child: Column(
@@ -64,6 +73,21 @@ class HomePage extends StatelessWidget {
               title: '2025.12 Day 11 - Counter Page',
               page: CounterPage(),
             ),
+            const SizedBox(height: 15),
+            _NavigationButton(
+              title: '2025.12 Day 12 - Login Page',
+              page: LoginPage(),
+            ),
+            const SizedBox(height: 15),
+            _NavigationButton(
+              title: '2025.12 Day 13 - Navigation Demo',
+              page: MainScreen(),
+            ),
+            const SizedBox(height: 15),
+            _NavigationButton(
+              title: '2025.12 Day 14 - Tasks List',
+              page: TasksListScreen(),
+            ),
           ],
         ),
       ),
@@ -74,22 +98,14 @@ class HomePage extends StatelessWidget {
 class _NavigationButton extends StatelessWidget {
   final String title;
   final Widget page;
-  
-  const _NavigationButton({
-    required this.title,
-    required this.page,
-  });
+
+  const _NavigationButton({required this.title, required this.page});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => page,
-          ),
-        );
+        Navigator.push(context, MaterialPageRoute(builder: (context) => page));
       },
       child: Text(title),
     );

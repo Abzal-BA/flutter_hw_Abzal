@@ -33,7 +33,8 @@ class _HwPageState extends State<HwPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        foregroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 38, 64, 84),
       ),
       body: Center(
         child: Column(
