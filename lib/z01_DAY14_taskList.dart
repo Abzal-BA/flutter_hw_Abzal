@@ -32,8 +32,23 @@ final List<String> tasks = [
 // ============================================================================
 // Task 2: Create list screen widget (TasksListScreen)
 // ============================================================================
-class TasksListScreen extends StatelessWidget {
+class TasksListScreen extends StatefulWidget {
   const TasksListScreen({super.key});
+
+  @override
+  State<TasksListScreen> createState() => _TasksListScreenState();
+}
+
+class _TasksListScreenState extends State<TasksListScreen> {
+  // Track checked state for each task
+  late List<bool> checkedTasks;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize all tasks as unchecked
+    checkedTasks = List.generate(tasks.length, (index) => false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,13 +88,28 @@ class TasksListScreen extends StatelessWidget {
                     // ============================================================================
                     // Task 5: Add icon to each list element
                     // ============================================================================
-                    leading: const Icon(
-                      Icons.check_box_outline_blank,
-                      color: Colors.blue,
+                    leading: IconButton(
+                      icon: Icon(
+                        checkedTasks[index]
+                            ? Icons.check_box
+                            : Icons.check_box_outline_blank,
+                        color: Colors.blue,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          checkedTasks[index] = !checkedTasks[index];
+                        });
+                      },
                     ),
                     title: Text(
                       tasks[index],
-                      style: const TextStyle(fontSize: 16),
+                      style: TextStyle(
+                        fontSize: 16,
+                        decoration: checkedTasks[index]
+                            ? TextDecoration.lineThrough
+                            : TextDecoration.none,
+                        color: checkedTasks[index] ? Colors.grey : Colors.black,
+                      ),
                     ),
                     trailing: const Icon(
                       Icons.arrow_forward_ios,
@@ -97,7 +127,7 @@ class TasksListScreen extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text('You selected: ${tasks[index]}'),
-                          duration: const Duration(seconds: 2),
+                          duration: const Duration(seconds: 5),
                           backgroundColor: Colors.blue,
                           behavior: SnackBarBehavior.floating,
                         ),
