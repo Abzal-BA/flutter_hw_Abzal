@@ -5,6 +5,8 @@ import 'z01_DAY11_counterPage.dart';
 import 'z01_DAY12_loginPage.dart';
 import 'z01_DAY13_detailScreen.dart';
 import 'z01_DAY14_taskList.dart';
+import 'z01_DAY15_httpRequest.dart';
+import 'z01_DAY16_persistentCounter.dart';
 
 // Day 09 Flutter - 01.12.2025
 // Day 10 Flutter - 06.12.2025
@@ -12,6 +14,8 @@ import 'z01_DAY14_taskList.dart';
 // Day 12 Flutter - 15.12.2025
 // Day 13 Flutter - 16.12.2025
 // Day 14 Flutter - 20.12.2025
+// Day 15 Flutter - 25.12.2025
+// Day 16 Flutter - 25.12.2025
 
 void main() {
   runApp(const MainApp());
@@ -87,6 +91,16 @@ class HomePage extends StatelessWidget {
             _NavigationButton(
               title: '2025.12 Day 14 - Tasks List',
               page: TasksListScreen(),
+            ),
+            const SizedBox(height: 15),
+            _NavigationButton(
+              title: '2025.12 Day 15 - HTTP Request',
+              page: PostsPage(),
+            ),
+            const SizedBox(height: 15),
+            _NavigationButton(
+              title: '2025.12 Day 16 - Persistent Counter',
+              page: PersistentCounterPage(),
             ),
           ],
         ),
