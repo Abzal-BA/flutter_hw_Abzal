@@ -8,6 +8,7 @@ import 'z01_day14_task_list.dart';
 import 'z01_day15_http_request.dart';
 import 'z01_day16_persistent_counter.dart';
 import 'z01_day17_provider_task_list.dart';
+import 'z01_day18_theme_adaptive.dart';
 
 // Day 09 Flutter - 01.12.2025
 // Day 10 Flutter - 06.12.2025
@@ -18,6 +19,7 @@ import 'z01_day17_provider_task_list.dart';
 // Day 15 Flutter - 25.12.2025
 // Day 16 Flutter - 25.12.2025
 // Day 17 Flutter - 13.01.2026
+// Day 18 Flutter - 13.01.2026
 
 void main() {
   runApp(const MainApp());
@@ -56,15 +58,17 @@ class HomePage extends StatelessWidget {
         foregroundColor: Colors.white,
         backgroundColor: const Color.fromARGB(255, 38, 64, 84),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Flutter Home Work',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 30),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 20),
+              const Text(
+                'Flutter Home Work',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 30),
             _NavigationButton(
               title: '2025.12 Day 9 - Flutter Project',
               page: HwApp(),
@@ -109,7 +113,14 @@ class HomePage extends StatelessWidget {
               title: '2026.01 Day 17 - Provider Task List',
               page: ProviderTaskListApp(),
             ),
+            const SizedBox(height: 15),
+            _NavigationButton(
+              title: '2026.01 Day 18 - Theme & Adaptive Layout',
+              page: ThemeAdaptiveApp(),
+            ),
+            const SizedBox(height: 20),
           ],
+        ),
         ),
       ),
     );

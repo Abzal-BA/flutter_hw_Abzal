@@ -46,20 +46,10 @@ class ProviderTaskListApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Task 3: Wrap MaterialApp with ChangeNotifierProvider, create TasksProvider instance
+    // Task 3: Wrap with ChangeNotifierProvider, create TasksProvider instance
     return ChangeNotifierProvider(
       create: (_) => TasksProvider(),
-      child: MaterialApp(
-        title: 'Provider Task List',
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 40, 80, 112),
-          ),
-        ),
-        home: const TaskListScreen(),
-        debugShowCheckedModeBanner: false,
-      ),
+      child: const TaskListScreen(),
     );
   }
 }
@@ -80,6 +70,10 @@ class TaskListScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
         title: const Text('Provider Task List'),
         foregroundColor: Colors.white,
         backgroundColor: const Color.fromARGB(255, 38, 64, 84),
