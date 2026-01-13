@@ -7,6 +7,7 @@ import 'z01_day13_detail_screen.dart';
 import 'z01_day14_task_list.dart';
 import 'z01_day15_http_request.dart';
 import 'z01_day16_persistent_counter.dart';
+import 'z01_day17_provider_task_list.dart';
 
 // Day 09 Flutter - 01.12.2025
 // Day 10 Flutter - 06.12.2025
@@ -16,6 +17,7 @@ import 'z01_day16_persistent_counter.dart';
 // Day 14 Flutter - 20.12.2025
 // Day 15 Flutter - 25.12.2025
 // Day 16 Flutter - 25.12.2025
+// Day 17 Flutter - 13.01.2026
 
 void main() {
   runApp(const MainApp());
@@ -101,6 +103,11 @@ class HomePage extends StatelessWidget {
             _NavigationButton(
               title: '2025.12 Day 16 - Persistent Counter',
               page: PersistentCounterPage(),
+            ),
+            const SizedBox(height: 15),
+            _NavigationButton(
+              title: '2026.01 Day 17 - Provider Task List',
+              page: ProviderTaskListApp(),
             ),
           ],
         ),
