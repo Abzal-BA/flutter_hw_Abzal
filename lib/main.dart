@@ -9,6 +9,7 @@ import 'z01_day15_http_request.dart';
 import 'z01_day16_persistent_counter.dart';
 import 'z01_day17_provider_task_list.dart';
 import 'z01_day18_theme_adaptive.dart';
+import 'z01_day19_image_gallery.dart';
 
 // Day 09 Flutter - 01.12.2025
 // Day 10 Flutter - 06.12.2025
@@ -20,6 +21,7 @@ import 'z01_day18_theme_adaptive.dart';
 // Day 16 Flutter - 25.12.2025
 // Day 17 Flutter - 13.01.2026
 // Day 18 Flutter - 13.01.2026
+// Day 19 Flutter - 13.01.2026
 
 void main() {
   runApp(const MainApp());
@@ -117,6 +119,11 @@ class HomePage extends StatelessWidget {
             _NavigationButton(
               title: '2026.01 Day 18 - Theme & Adaptive Layout',
               page: ThemeAdaptiveApp(),
+            ),
+            const SizedBox(height: 15),
+            _NavigationButton(
+              title: '2026.01 Day 19 - Image Gallery',
+              page: ImageGalleryApp(),
             ),
             const SizedBox(height: 20),
           ],
