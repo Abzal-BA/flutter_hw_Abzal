@@ -11,6 +11,7 @@ import 'z01_day17_provider_task_list.dart';
 import 'z01_day18_theme_adaptive.dart';
 import 'z01_day19_image_gallery.dart';
 import 'z01_day20_movie_catalog.dart';
+import 'z01_day21_ai_login_screen.dart';
 
 // Day 09 Flutter - 01.12.2025
 // Day 10 Flutter - 06.12.2025
@@ -24,6 +25,7 @@ import 'z01_day20_movie_catalog.dart';
 // Day 18 Flutter - 13.01.2026
 // Day 19 Flutter - 13.01.2026
 // Day 20 Flutter - 14.01.2026
+// Day 21 Flutter - 22.01.2026
 
 void main() {
   runApp(const MainApp());
@@ -131,6 +133,11 @@ class HomePage extends StatelessWidget {
             _NavigationButton(
               title: '2026.01 Day 20 - Movie Catalog App',
               page: MovieCatalogApp(),
+            ),
+            const SizedBox(height: 15),
+            _NavigationButton(
+              title: '2026.01 Day 21 - AI-Generated Login Screen',
+              page: LoginScreenApp(),
             ),
             const SizedBox(height: 20),
           ],
