@@ -14,6 +14,7 @@ import 'z01_day20_movie_catalog.dart';
 import 'z01_day21_ai_login_screen.dart';
 import 'z01_day22_ai_code_analysis.dart';
 import 'z01_day23_ai_development_workflow.dart';
+import 'z01_day24_flutter_animations.dart';
 
 // Day 09 Flutter - 01.12.2025
 // Day 10 Flutter - 06.12.2025
@@ -30,6 +31,7 @@ import 'z01_day23_ai_development_workflow.dart';
 // Day 21 Flutter - 22.01.2026
 // Day 22 Flutter - 22.01.2026
 // Day 23 Flutter - 25.01.2026
+// Day 24 Flutter - 09.02.2026
 
 void main() {
   runApp(const MainApp());
@@ -152,6 +154,11 @@ class HomePage extends StatelessWidget {
             _NavigationButton(
               title: '2026.01 Day 23 - AI Development Workflow',
               page: AIWorkflowApp(),
+            ),
+            const SizedBox(height: 15),
+            _NavigationButton(
+              title: '2026.02 Day 24 - Flutter Animations',
+              page: Day24AnimationsApp(),
             ),
             const SizedBox(height: 20),
           ],
