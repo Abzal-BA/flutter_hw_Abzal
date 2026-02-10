@@ -1,5 +1,21 @@
 import 'package:flutter/material.dart';
 
+// ============================================================================
+// Flutter - Home work Lesson 24
+// ============================================================================
+// 1) Learn: What is animation in Flutter and where it is used.
+//    - Create a mini example in a separate file/widget.
+//    - Write notes: what it is, when to use it, and 1–2 common pitfalls.
+// 2) Learn: Implicit animations: AnimatedContainer, AnimatedOpacity, AnimatedAlign.
+//    - Create a mini example in a separate file/widget.
+//    - Write notes: what it is, when to use it, and 1–2 common pitfalls.
+// 3) Learn: Duration and Curve: how they affect the “feel” of animation.
+//    - Create a mini example in a separate file/widget.
+//    - Write notes: what it is, when to use it, and 1–2 common pitfalls.
+// 4) Learn: UI state animations (pressed / loading / parameter changes).
+//    - Create a mini example in a separate file/widget.
+//    - Write notes: what it is, when to use it, and 1–2 common pitfalls.
+
 class Day24AnimationsApp extends StatefulWidget {
   const Day24AnimationsApp({super.key});
 
@@ -59,6 +75,7 @@ class _Day24AnimationsAppState extends State<Day24AnimationsApp>
   }
 
   Widget _buildAnimationBasicsTab() {
+    // Task 1: What is animation in Flutter + mini example + notes.
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -88,6 +105,7 @@ class _Day24AnimationsAppState extends State<Day24AnimationsApp>
   }
 
   Widget _buildImplicitAnimationsTab() {
+    // Task 2: Implicit animations + mini example + notes.
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -117,6 +135,7 @@ class _Day24AnimationsAppState extends State<Day24AnimationsApp>
   }
 
   Widget _buildDurationCurveTab() {
+    // Task 3: Duration and Curve + mini example + notes.
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -146,6 +165,7 @@ class _Day24AnimationsAppState extends State<Day24AnimationsApp>
   }
 
   Widget _buildUiStateTab() {
+    // Task 4: UI state animations + mini example + notes.
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
