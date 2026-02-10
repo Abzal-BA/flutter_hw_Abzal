@@ -17,6 +17,7 @@ import 'z01_day23_ai_development_workflow.dart';
 import 'z01_day24_flutter_animations.dart';
 import 'z01_day25_explicit_animations.dart';
 import 'z01_day26_advanced_animations.dart';
+import 'day_27/z01_day27_bloc_cubit.dart';
 
 // Day 09 Flutter - 01.12.2025
 // Day 10 Flutter - 06.12.2025
@@ -36,6 +37,7 @@ import 'z01_day26_advanced_animations.dart';
 // Day 24 Flutter - 09.02.2026
 // Day 25 Flutter - 10.02.2026
 // Day 26 Flutter - 10.02.2026
+// Day 27 Flutter - 10.02.2026
 
 void main() {
   runApp(const MainApp());
@@ -85,98 +87,103 @@ class HomePage extends StatelessWidget {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 30),
-            _NavigationButton(
-              title: '2025.12 Day 9 - Flutter Project',
-              page: HwApp(),
-            ),
-            const SizedBox(height: 15),
-            _NavigationButton(
-              title: '2025.12 Day 10 - Welcome Page',
-              page: WelcomeApp(),
-            ),
-            const SizedBox(height: 15),
-            _NavigationButton(
-              title: '2025.12 Day 11 - Counter Page',
-              page: CounterPage(),
-            ),
-            const SizedBox(height: 15),
-            _NavigationButton(
-              title: '2025.12 Day 12 - Login Page',
-              page: LoginPage(),
-            ),
-            const SizedBox(height: 15),
-            _NavigationButton(
-              title: '2025.12 Day 13 - Navigation Demo',
-              page: MainScreen(),
-            ),
-            const SizedBox(height: 15),
-            _NavigationButton(
-              title: '2025.12 Day 14 - Tasks List',
-              page: TasksListScreen(),
-            ),
-            const SizedBox(height: 15),
-            _NavigationButton(
-              title: '2025.12 Day 15 - HTTP Request',
-              page: PostsPage(),
-            ),
-            const SizedBox(height: 15),
-            _NavigationButton(
-              title: '2025.12 Day 16 - Persistent Counter',
-              page: PersistentCounterPage(),
-            ),
-            const SizedBox(height: 15),
-            _NavigationButton(
-              title: '2026.01 Day 17 - Provider Task List',
-              page: ProviderTaskListApp(),
-            ),
-            const SizedBox(height: 15),
-            _NavigationButton(
-              title: '2026.01 Day 18 - Theme & Adaptive Layout',
-              page: ThemeAdaptiveApp(),
-            ),
-            const SizedBox(height: 15),
-            _NavigationButton(
-              title: '2026.01 Day 19 - Image Gallery',
-              page: ImageGalleryApp(),
-            ),
-            const SizedBox(height: 15),
-            _NavigationButton(
-              title: '2026.01 Day 20 - Movie Catalog App',
-              page: MovieCatalogApp(),
-            ),
-            const SizedBox(height: 15),
-            _NavigationButton(
-              title: '2026.01 Day 21 - AI-Generated Login Screen',
-              page: LoginScreenApp(),
-            ),
-            const SizedBox(height: 15),
-            _NavigationButton(
-              title: '2026.01 Day 22 - AI Code Analysis & Refactoring',
-              page: CodeAnalysisDemo(),
-            ),
-            const SizedBox(height: 15),
-            _NavigationButton(
-              title: '2026.01 Day 23 - AI Development Workflow',
-              page: AIWorkflowApp(),
-            ),
-            const SizedBox(height: 15),
-            _NavigationButton(
-              title: '2026.02 Day 24 - Flutter Animations',
-              page: Day24AnimationsApp(),
-            ),
-            const SizedBox(height: 15),
-            _NavigationButton(
-              title: '2026.02 Day 25 - Explicit Animations',
-              page: Day25ExplicitAnimationsApp(),
-            ),
-            const SizedBox(height: 15),
-            _NavigationButton(
-              title: '2026.02 Day 26 - Advanced Animations',
-              page: Day26AdvancedAnimationsApp(),
-            ),
-            const SizedBox(height: 20),
-          ],
-        ),
+              _NavigationButton(
+                title: '2025.12 Day 9 - Flutter Project',
+                page: HwApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2025.12 Day 10 - Welcome Page',
+                page: WelcomeApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2025.12 Day 11 - Counter Page',
+                page: CounterPage(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2025.12 Day 12 - Login Page',
+                page: LoginPage(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2025.12 Day 13 - Navigation Demo',
+                page: MainScreen(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2025.12 Day 14 - Tasks List',
+                page: TasksListScreen(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2025.12 Day 15 - HTTP Request',
+                page: PostsPage(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2025.12 Day 16 - Persistent Counter',
+                page: PersistentCounterPage(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.01 Day 17 - Provider Task List',
+                page: ProviderTaskListApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.01 Day 18 - Theme & Adaptive Layout',
+                page: ThemeAdaptiveApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.01 Day 19 - Image Gallery',
+                page: ImageGalleryApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.01 Day 20 - Movie Catalog App',
+                page: MovieCatalogApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.01 Day 21 - AI-Generated Login Screen',
+                page: LoginScreenApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.01 Day 22 - AI Code Analysis & Refactoring',
+                page: CodeAnalysisDemo(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.01 Day 23 - AI Development Workflow',
+                page: AIWorkflowApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.02 Day 24 - Flutter Animations',
+                page: Day24AnimationsApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.02 Day 25 - Explicit Animations',
+                page: Day25ExplicitAnimationsApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.02 Day 26 - Advanced Animations',
+                page: Day26AdvancedAnimationsApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.02 Day 27 - flutter_bloc (BLoC/Cubit)',
+                page: Day27BlocCubitApp(),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );
