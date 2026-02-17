@@ -18,6 +18,7 @@ import 'z01_day24_flutter_animations.dart';
 import 'z01_day25_explicit_animations.dart';
 import 'z01_day26_advanced_animations.dart';
 import 'day_27/z01_day27_bloc_cubit.dart';
+import 'day_28/z01_day28_dio_networking.dart';
 
 // Day 09 Flutter - 01.12.2025
 // Day 10 Flutter - 06.12.2025
@@ -38,6 +39,7 @@ import 'day_27/z01_day27_bloc_cubit.dart';
 // Day 25 Flutter - 10.02.2026
 // Day 26 Flutter - 10.02.2026
 // Day 27 Flutter - 10.02.2026
+// Day 28 Flutter - 17.02.2026
 
 void main() {
   runApp(const MainApp());
@@ -180,6 +182,11 @@ class HomePage extends StatelessWidget {
               _NavigationButton(
                 title: '2026.02 Day 27 - flutter_bloc (BLoC/Cubit)',
                 page: Day27BlocCubitApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.02 Day 28 - Dio Networking',
+                page: Day28DioNetworkingApp(),
               ),
               const SizedBox(height: 20),
             ],
