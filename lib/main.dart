@@ -19,6 +19,7 @@ import 'z01_day25_explicit_animations.dart';
 import 'z01_day26_advanced_animations.dart';
 import 'day_27/z01_day27_bloc_cubit.dart';
 import 'day_28/z01_day28_dio_networking.dart';
+import 'day_29/z01_day29_drift_database.dart';
 
 // Day 09 Flutter - 01.12.2025
 // Day 10 Flutter - 06.12.2025
@@ -40,6 +41,7 @@ import 'day_28/z01_day28_dio_networking.dart';
 // Day 26 Flutter - 10.02.2026
 // Day 27 Flutter - 10.02.2026
 // Day 28 Flutter - 17.02.2026
+// Day 29 Flutter - 17.02.2026
 
 void main() {
   runApp(const MainApp());
@@ -166,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: const Text(
-                  '20 Lessons • Latest First',
+                  '21 Lessons • Latest First',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
@@ -175,6 +177,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(height: 30),
+              _NavigationButton(
+                title: '2026.02 Day 29 - Drift Database',
+                page: Day29DriftDatabaseApp(),
+              ),
+              const SizedBox(height: 15),
               _NavigationButton(
                 title: '2026.02 Day 28 - Dio Networking',
                 page: Day28DioNetworkingApp(),
