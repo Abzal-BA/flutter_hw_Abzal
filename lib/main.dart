@@ -67,8 +67,66 @@ class MainApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final ScrollController _scrollController = ScrollController();
+  double _scrollPercentage = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_updateScrollPercentage);
+  }
+
+  void _updateScrollPercentage() {
+    if (_scrollController.hasClients) {
+      final maxScroll = _scrollController.position.maxScrollExtent;
+      final currentScroll = _scrollController.position.pixels;
+      final newPercentage = maxScroll > 0 ? (currentScroll / maxScroll) : 0.0;
+      if (mounted && (newPercentage - _scrollPercentage).abs() > 0.001) {
+        setState(() {
+          _scrollPercentage = newPercentage;
+        });
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_updateScrollPercentage);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  void _scrollToBottom() {
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  void _scrollToPosition(double position) {
+    if (_scrollController.hasClients) {
+      final maxScroll = _scrollController.position.maxScrollExtent;
+      final targetScroll = position * maxScroll;
+      _scrollController.jumpTo(targetScroll.clamp(0.0, maxScroll));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,105 +136,48 @@ class HomePage extends StatelessWidget {
         foregroundColor: Colors.white,
         backgroundColor: const Color.fromARGB(255, 38, 64, 84),
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+      body: Stack(
+        children: [
+          NotificationListener<ScrollNotification>(
+            onNotification: (notification) {
+              if (notification is ScrollUpdateNotification ||
+                  notification is ScrollEndNotification) {
+                _updateScrollPercentage();
+              }
+              return false;
+            },
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 60, left: 16), // Space for scroll indicator and left padding
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
               const SizedBox(height: 20),
               const Text(
                 'Flutter Home Work',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
+              const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 38, 64, 84).withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Text(
+                  '20 Lessons • Latest First',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Color.fromARGB(255, 38, 64, 84),
+                  ),
+                ),
+              ),
               const SizedBox(height: 30),
               _NavigationButton(
-                title: '2025.12 Day 9 - Flutter Project',
-                page: HwApp(),
-              ),
-              const SizedBox(height: 15),
-              _NavigationButton(
-                title: '2025.12 Day 10 - Welcome Page',
-                page: WelcomeApp(),
-              ),
-              const SizedBox(height: 15),
-              _NavigationButton(
-                title: '2025.12 Day 11 - Counter Page',
-                page: CounterPage(),
-              ),
-              const SizedBox(height: 15),
-              _NavigationButton(
-                title: '2025.12 Day 12 - Login Page',
-                page: LoginPage(),
-              ),
-              const SizedBox(height: 15),
-              _NavigationButton(
-                title: '2025.12 Day 13 - Navigation Demo',
-                page: MainScreen(),
-              ),
-              const SizedBox(height: 15),
-              _NavigationButton(
-                title: '2025.12 Day 14 - Tasks List',
-                page: TasksListScreen(),
-              ),
-              const SizedBox(height: 15),
-              _NavigationButton(
-                title: '2025.12 Day 15 - HTTP Request',
-                page: PostsPage(),
-              ),
-              const SizedBox(height: 15),
-              _NavigationButton(
-                title: '2025.12 Day 16 - Persistent Counter',
-                page: PersistentCounterPage(),
-              ),
-              const SizedBox(height: 15),
-              _NavigationButton(
-                title: '2026.01 Day 17 - Provider Task List',
-                page: ProviderTaskListApp(),
-              ),
-              const SizedBox(height: 15),
-              _NavigationButton(
-                title: '2026.01 Day 18 - Theme & Adaptive Layout',
-                page: ThemeAdaptiveApp(),
-              ),
-              const SizedBox(height: 15),
-              _NavigationButton(
-                title: '2026.01 Day 19 - Image Gallery',
-                page: ImageGalleryApp(),
-              ),
-              const SizedBox(height: 15),
-              _NavigationButton(
-                title: '2026.01 Day 20 - Movie Catalog App',
-                page: MovieCatalogApp(),
-              ),
-              const SizedBox(height: 15),
-              _NavigationButton(
-                title: '2026.01 Day 21 - AI-Generated Login Screen',
-                page: LoginScreenApp(),
-              ),
-              const SizedBox(height: 15),
-              _NavigationButton(
-                title: '2026.01 Day 22 - AI Code Analysis & Refactoring',
-                page: CodeAnalysisDemo(),
-              ),
-              const SizedBox(height: 15),
-              _NavigationButton(
-                title: '2026.01 Day 23 - AI Development Workflow',
-                page: AIWorkflowApp(),
-              ),
-              const SizedBox(height: 15),
-              _NavigationButton(
-                title: '2026.02 Day 24 - Flutter Animations',
-                page: Day24AnimationsApp(),
-              ),
-              const SizedBox(height: 15),
-              _NavigationButton(
-                title: '2026.02 Day 25 - Explicit Animations',
-                page: Day25ExplicitAnimationsApp(),
-              ),
-              const SizedBox(height: 15),
-              _NavigationButton(
-                title: '2026.02 Day 26 - Advanced Animations',
-                page: Day26AdvancedAnimationsApp(),
+                title: '2026.02 Day 28 - Dio Networking',
+                page: Day28DioNetworkingApp(),
               ),
               const SizedBox(height: 15),
               _NavigationButton(
@@ -185,13 +186,256 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 15),
               _NavigationButton(
-                title: '2026.02 Day 28 - Dio Networking',
-                page: Day28DioNetworkingApp(),
+                title: '2026.02 Day 26 - Advanced Animations',
+                page: Day26AdvancedAnimationsApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.02 Day 25 - Explicit Animations',
+                page: Day25ExplicitAnimationsApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.02 Day 24 - Flutter Animations',
+                page: Day24AnimationsApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.01 Day 23 - AI Development Workflow',
+                page: AIWorkflowApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.01 Day 22 - AI Code Analysis & Refactoring',
+                page: CodeAnalysisDemo(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.01 Day 21 - AI-Generated Login Screen',
+                page: LoginScreenApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.01 Day 20 - Movie Catalog App',
+                page: MovieCatalogApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.01 Day 19 - Image Gallery',
+                page: ImageGalleryApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.01 Day 18 - Theme & Adaptive Layout',
+                page: ThemeAdaptiveApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2026.01 Day 17 - Provider Task List',
+                page: ProviderTaskListApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2025.12 Day 16 - Persistent Counter',
+                page: PersistentCounterPage(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2025.12 Day 15 - HTTP Request',
+                page: PostsPage(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2025.12 Day 14 - Tasks List',
+                page: TasksListScreen(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2025.12 Day 13 - Navigation Demo',
+                page: MainScreen(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2025.12 Day 12 - Login Page',
+                page: LoginPage(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2025.12 Day 11 - Counter Page',
+                page: CounterPage(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2025.12 Day 10 - Welcome Page',
+                page: WelcomeApp(),
+              ),
+              const SizedBox(height: 15),
+              _NavigationButton(
+                title: '2025.12 Day 9 - Flutter Project',
+                page: HwApp(),
               ),
               const SizedBox(height: 20),
             ],
           ),
+            ),
+          ),
         ),
+          // Custom scroll indicator
+          Positioned(
+            right: 16,
+            top: 80,
+            bottom: 16,
+            child: Column(
+              children: [
+                // Up arrow
+                GestureDetector(
+                  onTap: _scrollToTop,
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 38, 64, 84),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: const Icon(
+                      Icons.arrow_upward,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                // Scroll indicator bar
+                Expanded(
+                  child: GestureDetector(
+                    onVerticalDragUpdate: (details) {
+                      final RenderBox box = context.findRenderObject() as RenderBox;
+                      final localPosition = details.localPosition.dy;
+                      final barHeight = box.size.height - 96; // Subtract arrows and spacing
+                      final position = (localPosition - 48) / barHeight; // Adjust for top arrow
+                      _scrollToPosition(position.clamp(0.0, 1.0));
+                    },
+                    onTapDown: (details) {
+                      final RenderBox box = context.findRenderObject() as RenderBox;
+                      final localPosition = details.localPosition.dy;
+                      final barHeight = box.size.height - 96;
+                      final position = (localPosition - 48) / barHeight;
+                      _scrollToPosition(position.clamp(0.0, 1.0));
+                    },
+                    child: Container(
+                      width: 32,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: const Color.fromARGB(255, 38, 64, 84),
+                          width: 2,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.15),
+                            blurRadius: 6,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(14),
+                        child: Stack(
+                          children: [
+                            // Background track
+                            Container(
+                              color: Colors.grey[300],
+                            ),
+                            // Filled portion
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: FractionallySizedBox(
+                                heightFactor: _scrollPercentage.clamp(0.05, 1.0), // Min 5% visible
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    gradient: const LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [
+                                        Color.fromARGB(255, 66, 165, 245),
+                                        Color.fromARGB(255, 21, 101, 192),
+                                      ],
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.blue.withOpacity(0.3),
+                                        blurRadius: 4,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            // Percentage text overlay
+                            if (_scrollPercentage > 0.1)
+                              Center(
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 4,
+                                    vertical: 2,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.6),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Text(
+                                    '${(_scrollPercentage * 100).toInt()}%',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                // Down arrow
+                GestureDetector(
+                  onTap: _scrollToBottom,
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 38, 64, 84),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: const Icon(
+                      Icons.arrow_downward,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -205,11 +449,17 @@ class _NavigationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => page));
-      },
-      child: Text(title),
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+        },
+        style: ElevatedButton.styleFrom(
+          alignment: Alignment.centerLeft,
+        ),
+        child: Text(title),
+      ),
     );
   }
 }
