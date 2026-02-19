@@ -20,6 +20,8 @@ import 'z01_day26_advanced_animations.dart';
 import 'day_27/z01_day27_bloc_cubit.dart';
 import 'day_28/z01_day28_dio_networking.dart';
 import 'day_29/z01_day29_drift_database.dart';
+import 'day_30/z01_day30_dependency_injection.dart';
+import 'day_30/service_locator.dart';
 
 // Day 09 Flutter - 01.12.2025
 // Day 10 Flutter - 06.12.2025
@@ -42,8 +44,63 @@ import 'day_29/z01_day29_drift_database.dart';
 // Day 27 Flutter - 10.02.2026
 // Day 28 Flutter - 17.02.2026
 // Day 29 Flutter - 17.02.2026
+// Day 30 Flutter - 18.02.2026
 
-void main() {
+// ============================================================================
+// 🚀 ASYNC INITIALIZATION BEFORE runApp
+// ============================================================================
+// Pattern: Initialize async dependencies BEFORE starting the Flutter app
+//
+// WHY WE NEED THIS:
+// - Some services require async initialization (SharedPreferences, Firebase, etc.)
+// - Without waiting, widgets might try to use uninitialized services → crashes!
+// - This ensures everything is ready before the first widget builds
+//
+// HOW IT WORKS:
+// 1. main() is marked as 'async' to allow await calls
+// 2. WidgetsFlutterBinding.ensureInitialized() - prepares Flutter framework
+// 3. await setupServiceLocator() - waits for all async dependencies
+// 4. runApp() - only called after everything is ready
+//
+// WHAT GETS INITIALIZED:
+// ✅ SharedPreferences (persistent storage)
+// ✅ Firebase (if used)
+// ✅ Database connections
+// ✅ Network clients
+// ✅ Service locator registrations
+//
+// WITHOUT THIS:
+// ❌ App might crash trying to access uninitialized SharedPreferences
+// ❌ Race conditions between widget builds and async init
+// ❌ Unreliable startup behavior
+// ============================================================================
+
+void main() async {
+  // ============================================================
+  // STEP 1: Ensure Flutter Binding is initialized
+  // ============================================================
+  // This MUST be called before any async operations in main()
+  // It initializes the Flutter engine and binding
+  // Required when main() is async and before runApp()
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // ============================================================
+  // STEP 2: Initialize all async dependencies
+  // ============================================================
+  // Wait for service locator setup to complete
+  // This includes:
+  // - SharedPreferences instance creation
+  // - Registering all services in get_it
+  // - Setting up Mock/Real API client based on kDebugMode
+  //
+  // The 'await' keyword blocks here until setup is complete
+  await setupServiceLocator();
+  
+  // ============================================================
+  // STEP 3: Start the Flutter app
+  // ============================================================
+  // Now it's safe to run the app - all dependencies are ready!
+  // Widgets can safely call getIt<T>() without crashes
   runApp(const MainApp());
 }
 
@@ -168,7 +225,7 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: const Text(
-                  '21 Lessons • Latest First',
+                  '22 Lessons • Latest First',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
@@ -177,6 +234,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(height: 30),
+              _NavigationButton(
+                title: '2026.02 Day 30 - Dependency Injection',
+                page: Day30DependencyInjectionApp(),
+              ),
+              const SizedBox(height: 15),
               _NavigationButton(
                 title: '2026.02 Day 29 - Drift Database',
                 page: Day29DriftDatabaseApp(),
