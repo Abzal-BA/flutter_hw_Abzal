@@ -22,6 +22,7 @@ import 'day_28/z01_day28_dio_networking.dart';
 import 'day_29/z01_day29_drift_database.dart';
 import 'day_30/z01_day30_dependency_injection.dart';
 import 'day_30/service_locator.dart';
+import 'day_31/z01_day31_packages.dart';
 
 // Day 09 Flutter - 01.12.2025
 // Day 10 Flutter - 06.12.2025
@@ -45,6 +46,7 @@ import 'day_30/service_locator.dart';
 // Day 28 Flutter - 17.02.2026
 // Day 29 Flutter - 17.02.2026
 // Day 30 Flutter - 18.02.2026
+// Day 31 Flutter - 23.02.2026
 
 // ============================================================================
 // 🚀 ASYNC INITIALIZATION BEFORE runApp
@@ -225,7 +227,7 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: const Text(
-                  '22 Lessons • Latest First',
+                  '23 Lessons • Latest First',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
@@ -234,6 +236,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(height: 30),
+              _NavigationButton(
+                title: '2026.02 Day 31 - Popular Packages',
+                page: Day31PackagesApp(),
+              ),
+              const SizedBox(height: 15),
               _NavigationButton(
                 title: '2026.02 Day 30 - Dependency Injection',
                 page: Day30DependencyInjectionApp(),
